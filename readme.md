@@ -30,9 +30,13 @@ En el proyecto, existe un fichero inicial que se llama compra.db, que ya lleva i
 ```
 Si no se tiene el fichero, este se debe crear, con el nombre de compra.db.
 
-Una vez creada, hay que compilar y ejecutar el codigo de JDBC, teniendo en cuenta que hay que hacerlo mediante la terminal, quedando de tal manera javac -cp rutajar;. JDBC.java ---> java -cp rutajar;. JDBC.
+Una vez creada, hay que compilar y ejecutar el codigo de JDBC,
+teniendo en cuenta que hay que hacerlo mediante la terminal, quedando 
+de tal manera javac -cp rutajar;. JDBC.java ---> java -cp rutajar;. JDBC.
 
-Una vez ejecutado el programa, ya se tiene la base de datos creada,con la conexion creada y con la tabla insertada, y solo hace falta ejecutar el programa principal para poder introducirle datos.
+Una vez ejecutado el programa, ya se tiene la base de datos creada,con la
+conexion creada y con la tabla insertada, y solo hace falta ejecutar el 
+programa principal para poder introducirle datos.
 ```
 ## ¿Qué se ha usado?
 Para este trabajo usamos JSON para leer el catálogo de productos y JDBC (Java Data Base Connectivity) para almacenar los pedidos en una base de datos.  
