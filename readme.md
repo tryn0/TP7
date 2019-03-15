@@ -45,7 +45,7 @@ Para poder ejecutar correctamente esta trabajo es necesario tener dos archivo .j
 
 ## Contenido del proyecto:
 
-Tienda.java     --> Es la clase principal, cuyo funcionamiento se explica mas adelante.
+Tienda.java     --> Es la clase principal, cuyo funcionamiento se explica más adelante.
 
 Compra.java     --> Crea un objeto compra, que contiene la clase Articulo, y la clase Persona implementadas.
 
@@ -53,15 +53,15 @@ Articulo.java   --> Objeto articulo, que contiene el nombre y el precio del arti
 
 Person.java     --> Objeto persona, que contiene el nombre de una persona.
 
-DAOCompra.java  --> Interface que se usara para hacer implementaciones de base de datos.
+DAOCompra.java  --> Interface que se usará para hacer implementaciones de base de datos.
 
-JDBCCompra.java --> Contiene metodos para conectarse a la bd, para grabar, y para consultar la base de datos.
+JDBCCompra.java --> Contiene métodos para conectarse a la bd, para grabar, y para consultar la base de datos.
 
 JDBC.java       --> Sirve para crear la tabla "compra".
 
-productos.json  --> Aqui se guarda el catalogo de compras, en formato json.
+productos.json  --> Aquí se guarda el catálogo de compras, en formato json.
 
-compra.db       --> es el fichero de base de datos, que contiene la tabla "compra".
+compra.db       --> Es el fichero de base de datos, que contiene la tabla "compra".
 
 ## Fin:
 Este programa tiene el fin de guardar una lista de compras o factura de compras.  
