@@ -26,6 +26,7 @@ java -cp .;json-20180813.jar;sqlite-jdbc-3.25.2.jar;. tienda
 Ejcutar a través de la línea de comandos de Windows o de la terminal de linux.
 ## Para la base de datos:
 En el proyecto, existe un fichero inicial que se llama compra.db, que ya lleva introducida la base de datos y la tabla.
+
 **¿Que hacer en caso de no tener dicho fichero?**
 ```
 Si no se tiene el fichero, este se debe crear, con el nombre de compra.db.
