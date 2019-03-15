@@ -45,7 +45,8 @@ Para poder ejecutar correctamente esta trabajo es necesario tener dos archivo .j
 
 ## Fin:
 Este programa tiene el fin de guardar una lista de compras o factura de compras.  
-Al ejecutar mostrará una serie de productos disponibles, de los cuales el cliente deberá elegir el deseado y la cantidad que desee.  
+Al ejecutar mostrará una serie de productos disponibles, de los cuales el cliente deberá elegir el deseado y la cantidad que desee. 
+
 Una vez elegidos todos los productos, se mostrará el precio total por producto.  
 Seguidamente nos dará la opción de visualizar la factura a través de una base de datos, donde se almacenan los datos de las facturas (persona, producto, cantidad, precio e ID).
 
