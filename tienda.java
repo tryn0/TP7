@@ -1,6 +1,6 @@
+//imports de lo que usaremos
 import java.util.ArrayList;
 import java.io.Console;
-import java.lang.Error;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import org.json.JSONArray;
@@ -10,8 +10,8 @@ import java.util.Date;
 
 public class tienda{
 	public static void main(String args[]) throws Exception {
-		DAOCompra daocompra = new JDBCCompra();//para las consultas
-		//a continuacion, el codigo es para leer el fichero json, que corresponde al catalogo de productos.	
+		DAOCompra daocompra = new JDBCCompra();//creacion de DAO para lo relacionado con la base de datos
+		//a continuacion, el codigo para leer el fichero json, que corresponde al catalogo de productos.	
 		String line = new String("");
 		String lin = null;
 		ArrayList<String> listaProds = new ArrayList<String>();	
@@ -25,7 +25,7 @@ public class tienda{
         		String nombre = ((JSONObject) obj).getString("nombre");
         		String precio = ((JSONObject) obj).getString("precio");
         		listaProds.add(nombre + ":" + precio);//los datos se pasan a una lista,para tenerlos guardados y poder usarlos
-        		if(precio.equals("1")){
+        		if(precio.equals("1")){//filtrado de precio para que muestre 1 euro o X euros.
         			System.out.println(nombre + ": " + precio + " euro");
         		}
         		else{
@@ -37,22 +37,22 @@ public class tienda{
 		ArrayList<Compra> lista1 = new ArrayList<Compra>();
 		Console console = null;
 		console = System.console();
-		while(true){//aqui se pone en bucle para que puedan haber mas de una persona con su respectiva id de compra
+		while(true){//bucle para crear compras, con sus respectivos datos (persona, articulos, cantidad y precio)
 			c = new Compra();
 			Person p = new Person();
-			System.out.println("Nombre persona: ");
+			System.out.println("Nombre persona: ");//nombre de la persona
 			String persona = console.readLine();
 			if(persona.equals("")){
 					break;
 				}
-			p.setName(persona);
+			p.setName(persona);//setteo nombre de la persona
 			System.out.println("ID de compra: ");
 			String idcomp = console.readLine();
 			int idcom=Integer.parseInt(idcomp);
 			
 			while(true){//este while es para que una persona pueda comprar mas de un articulo en una compra
-				c.setId(idcom);
-				System.out.println("Articulos: ");
+				c.setId(idcom);//setteo del id
+				System.out.println("Articulos: ");//articulo
 				String articulo = console.readLine();
 				if(articulo.equals("")){
 					break;
@@ -61,71 +61,75 @@ public class tienda{
 					String[] a = listaProds.get(i).split(":");
 					
 					if(articulo.equals(a[0])){
-						c.getArt().setNombre(articulo);
+						c.getArt().setNombre(articulo);//si el articulo está en la lista de productos disponibles, setteo del articulo
 
 						int preciop=Integer.parseInt(a[1]);
-						System.out.println("Cantidad: ");
+						System.out.println("Cantidad: ");//cantidad de articulos
 						String canti = console.readLine();
 						if(canti.equals("")){
 							break;
 						}
 						int cant = Integer.parseInt(canti);
-						c.getArt().setPrecio(preciop * cant);
-						c.setCant(cant);
-						c.getPer().setName(p.getName());
-						Date fechaFactura = new Date();
-						c.setFecha(fechaFactura);
-						lista1.add(c);
+						c.getArt().setPrecio(preciop * cant);//setteo de precio por cantidad (precio final por producto)
+						c.setCant(cant);//setteo de cantidad
+						c.getPer().setName(p.getName());//setteo de la persona dentro de la clase Compra
+						Date fechaFactura = new Date();//Creación de fecha
+						c.setFecha(fechaFactura);//setteo a la compra de fecha/hora
+						lista1.add(c);//añadido de la compra a la lista
 						daocompra.grabar(c);//se guarda en la base de datos
 					}
 				}
-				System.out.println("Mas articulos? s/n ");
+				System.out.println("Mas articulos? S|N ");//Para agregar más articulos a la misma persona
 				String masart = console.readLine();
 				if(masart.equals("n")){
 					c.setArticulos(lista1);
 					break;
 				}
 				else{
-					c = new Compra();
+					c = new Compra();//si queremos agregar más articulos crea una nueva compra y se le añaden articulos, al no haber creado una persona nueva
+					//se le agrega la ultima persona creada, asi no crea conflictos de persona de compra = null
+					//ni agregar articulos de otras personas.
 				}
 			}
-			System.out.println("Mas entradas? s/n ");
+			System.out.println("Mas entradas? S|N ");//Para agregar más entradas (personas y articulos)
 			String masper = console.readLine();
 			if(masper.equals("n")){
 				break;
 			}
 		}
+		//Confirmación de registro en la base de datos, con la fecha de la factura.
+		System.out.println("Los datos han quedado guardados en la base de datos. A fecha de "+ new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(c.getFecha()));
+		//Se le cambia el formato de la fecha de Compra para que la muestre como nosotros la visualizamos dia-mes-año y hora:min:seg
 
-		System.out.println("Los datos han quedado guardados en la base de datos. Con fecha: "+ new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(c.getFecha()));
 		while(true){//aqui es donde esta la parte de consultas.
 			System.out.println("Quieres consultar datos? S|N");
 			String respuesta = console.readLine();
 			if (respuesta.equals("s")){
 				daocompra.consultart();//te muestra todos los datos guardados
-				System.out.println("Para consultar por persona: N|para consultar por producto: P|para mostrar por ID: I");
+				System.out.println("Para consultar por persona: N | Para consultar por producto: P | Para mostrar por ID: I");
 				String respuesta2 = console.readLine();
 				if(respuesta2.equals("n")){
-					System.out.println("intrduce nombre");
+					System.out.println("Introduce nombre");
 					String r = console.readLine();
 					daocompra.consultarn(r);//te muestra los datos que contienen el nombre introducido
 				}
 				else if(respuesta2.equals("p")){
-					System.out.println("intrduce producto");
+					System.out.println("Introduce producto");
 					String r = console.readLine();//te muestra los datos que contienen el producto introducido
 					daocompra.consultarp(r);
 				}
 				else if(respuesta2.equals("i")){
-					System.out.println("intrduce id");
+					System.out.println("Introduce id");
 					String r = console.readLine();
 					int r2=Integer.parseInt(r);
 					daocompra.consultari(r2);//te muestra la compra de una persona
 				}
-				else{
-					System.out.println("Lo sentimos! esa opcion no esta disponible");
+				else{//si la opcion que se introdujo no es n, p, i que salte este error y que pregunte si desea consultar o no.
+					System.out.println("Lo sentimos! Esa opcion no esta disponible");
 				}
 			}
-			else{
-				System.out.println("ADIOS");
+			else{//Mensaje despedida cuando el cliente se vaya
+				System.out.println("Vuelva pronto.");
 				break;
 			}
 		}
