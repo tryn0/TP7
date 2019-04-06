@@ -25,7 +25,12 @@ public class tienda{
         		String nombre = ((JSONObject) obj).getString("nombre");
         		String precio = ((JSONObject) obj).getString("precio");
         		listaProds.add(nombre + ":" + precio);//los datos se pasan a una lista,para tenerlos guardados y poder usarlos
-        		System.out.println(nombre + ": " + precio + " euros");
+        		if(precio.equals("1")){
+        			System.out.println(nombre + ": " + precio + " euro");
+        		}
+        		else{
+        			System.out.println(nombre + ": " + precio + " euros");
+        		}
         	}
         //una vez leidos y guardados, se empieza con la compra
 		Compra c;
