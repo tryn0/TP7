@@ -6,7 +6,7 @@ public class JDBC {
 		Connection conn = null;
 		try{
 			String url = "jdbc:sqlite:compra.db";
-			String sql = "CREATE TABLE IF NOT EXISTS compra (Cliente TEXT,Producto TEXT,Cantidad INTEGER,Precio INTEGER,ID INTEGER);";
+			String sql = "CREATE TABLE IF NOT EXISTS compra (Cliente TEXT,Producto TEXT,Cantidad INTEGER,Precio INTEGER,ID INTEGER, Fecha TIMESTAMP);";
 			conn = DriverManager.getConnection(url);
 			Statement statement = conn.createStatement();
 			statement.executeUpdate(sql);

@@ -1,10 +1,12 @@
-import java.util.*;
-import java.io.*;
+import java.util.ArrayList;
+import java.io.Console;
 import java.lang.Error;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class tienda{
 	public static void main(String args[]) throws Exception {
@@ -12,16 +14,16 @@ public class tienda{
 		//a continuacion, el codigo es para leer el fichero json, que corresponde al catalogo de productos.	
 		String line = new String("");
 		String lin = null;
-		ArrayList<String> listaProds=new ArrayList<String>();	
+		ArrayList<String> listaProds = new ArrayList<String>();	
 		BufferedReader br = new BufferedReader(new FileReader("productos.json"));		
 		while((lin = br.readLine()) != null) {
           	line = line + lin;
         }
-        JSONArray jsonProductos=new JSONArray(line);
+        JSONArray jsonProductos = new JSONArray(line);
 
         for (Object obj : jsonProductos){
-        		String nombre =((JSONObject) obj).getString("nombre");
-        		String precio =((JSONObject) obj).getString("precio");
+        		String nombre = ((JSONObject) obj).getString("nombre");
+        		String precio = ((JSONObject) obj).getString("precio");
         		listaProds.add(nombre + ":" + precio);//los datos se pasan a una lista,para tenerlos guardados y poder usarlos
         		System.out.println(nombre + ": " + precio + " euros");
         	}
@@ -66,6 +68,8 @@ public class tienda{
 						c.getArt().setPrecio(preciop * cant);
 						c.setCant(cant);
 						c.getPer().setName(p.getName());
+						Date fechaFactura = new Date();
+						c.setFecha(fechaFactura);
 						lista1.add(c);
 						daocompra.grabar(c);//se guarda en la base de datos
 					}
@@ -86,7 +90,8 @@ public class tienda{
 				break;
 			}
 		}
-		System.out.println("Los datos han quedado guardados en la base de datos.");
+
+		System.out.println("Los datos han quedado guardados en la base de datos. Con fecha: "+ new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(c.getFecha()));
 		while(true){//aqui es donde esta la parte de consultas.
 			System.out.println("Quieres consultar datos? S|N");
 			String respuesta = console.readLine();

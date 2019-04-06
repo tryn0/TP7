@@ -3,10 +3,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
-import java.sql.*;
+
 //aqui esta el codigo para grabar y consultar
 public class JDBCCompra implements DAOCompra{
-	
 	private Connection conectar() {//se hace un metodo para la conexión, para asi no tener que copiar el codigo siempre
 		String url = "jdbc:sqlite:compra.db";
 		Connection conn = null;
@@ -19,13 +18,15 @@ public class JDBCCompra implements DAOCompra{
 	}
 
 	public void grabar(Compra c) {//codigo para grabar
-		String sql = "INSERT INTO compra (Cliente,Producto,Cantidad,Precio,ID) VALUES(?,?,?,?,?)";
+		java.sql.Timestamp sqlDate = new java.sql.Timestamp(c.getFecha().getTime());
+		String sql = "INSERT INTO compra (Cliente,Producto,Cantidad,Precio,ID,Fecha) VALUES(?,?,?,?,?,?)";
 		try (Connection conn = this.conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, c.getPer().getName());
 			pstmt.setString(2, c.getArt().getNombre());
 			pstmt.setInt(3, c.getCant());
 			pstmt.setInt(4, c.getArt().getPrecio());
 			pstmt.setInt(5, c.getId());
+			pstmt.setTimestamp(6, sqlDate);
 			pstmt.executeUpdate();
 		} catch (SQLException o) {
 			System.out.println(o.getMessage());
@@ -38,9 +39,9 @@ public class JDBCCompra implements DAOCompra{
 			Connection conn = this.conectar();
 			PreparedStatement pstmt = conn.prepareStatement(sql1);
 			ResultSet rs = pstmt.executeQuery();
-			System.out.println("CLIENTE|PRODUCTO|CANTIDAD|PRECIO|ID");
+			System.out.println("CLIENTE|PRODUCTO|CANTIDAD|PRECIO|ID|FECHA");
 			while (rs.next()) {	
-				 System.out.println(rs.getString("Cliente")+ " | " +rs.getString("Producto")+" | "+rs.getInt("Cantidad")+" | "+rs.getInt("Precio") + " | " + rs.getInt("ID"));
+				 System.out.println(rs.getString("Cliente")+ " | " +rs.getString("Producto")+" | "+rs.getInt("Cantidad")+" | "+rs.getInt("Precio") + " | " + rs.getInt("ID") + " | " + rs.getTimestamp("Fecha"));
 
 			 }	
 			
@@ -55,9 +56,9 @@ public class JDBCCompra implements DAOCompra{
 			Connection conn = this.conectar();
 			PreparedStatement pstmt = conn.prepareStatement(sql2);
 			ResultSet rs = pstmt.executeQuery();
-			System.out.println("CLIENTE|PRODUCTO|CANTIDAD|PRECIO|ID");
+			System.out.println("CLIENTE|PRODUCTO|CANTIDAD|PRECIO|ID|FECHA");
 			while (rs.next()) {	
-				 System.out.println(rs.getString("Cliente")+ " | " +rs.getString("Producto")+" | "+rs.getInt("Cantidad")+" | "+rs.getInt("Precio") + " | " + rs.getInt("ID"));
+				 System.out.println(rs.getString("Cliente")+ " | " +rs.getString("Producto")+" | "+rs.getInt("Cantidad")+" | "+rs.getInt("Precio") + " | " + rs.getInt("ID") + " | " + rs.getTimestamp("Fecha"));
 
 			 }	
 		}
@@ -72,9 +73,9 @@ public class JDBCCompra implements DAOCompra{
 			Connection conn = this.conectar();
 			PreparedStatement pstmt = conn.prepareStatement(sql2);
 			ResultSet rs = pstmt.executeQuery();
-			System.out.println("CLIENTE|PRODUCTO|CANTIDAD|PRECIO|ID");
+			System.out.println("CLIENTE|PRODUCTO|CANTIDAD|PRECIO|ID|FECHA");
 			while (rs.next()) {	
-				 System.out.println(rs.getString("Cliente")+ " | " +rs.getString("Producto")+" | "+rs.getInt("Cantidad")+" | "+rs.getInt("Precio") + " | " + rs.getInt("ID"));
+				 System.out.println(rs.getString("Cliente")+ " | " +rs.getString("Producto")+" | "+rs.getInt("Cantidad")+" | "+rs.getInt("Precio") + " | " + rs.getInt("ID") + " | " + rs.getTimestamp("Fecha"));
 
 			 }	
 		}
@@ -89,9 +90,9 @@ public class JDBCCompra implements DAOCompra{
 			Connection conn = this.conectar();
 			PreparedStatement pstmt = conn.prepareStatement(sql2);
 			ResultSet rs = pstmt.executeQuery();
-			System.out.println("CLIENTE|PRODUCTO|CANTIDAD|PRECIO|ID");
+			System.out.println("CLIENTE|PRODUCTO|CANTIDAD|PRECIO|ID|FECHA");
 			while (rs.next()) {	
-				 System.out.println(rs.getString("Cliente")+ " | " +rs.getString("Producto")+" | "+rs.getInt("Cantidad")+" | "+rs.getInt("Precio") + " | " + rs.getInt("ID"));
+				 System.out.println(rs.getString("Cliente")+ " | " +rs.getString("Producto")+" | "+rs.getInt("Cantidad")+" | "+rs.getInt("Precio") + " | " + rs.getInt("ID") + " | " + rs.getTimestamp("Fecha"));
 
 			 }	
 		}
