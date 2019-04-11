@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.lang.Double;
 
 public class tienda{
 	public static void main(String args[]) throws Exception {
@@ -25,12 +26,9 @@ public class tienda{
         		String nombre = ((JSONObject) obj).getString("nombre");
         		String precio = ((JSONObject) obj).getString("precio");
         		listaProds.add(nombre + ":" + precio);//los datos se pasan a una lista,para tenerlos guardados y poder usarlos
-        		if(precio.equals("1")){//filtrado de precio para que muestre 1 euro o X euros.
-        			System.out.println(nombre + ": " + precio + " euro");
-        		}
-        		else{
-        			System.out.println(nombre + ": " + precio + " euros");
-        		}
+
+        			System.out.println(nombre + ": " + precio + " €");
+        		
         	}
         //una vez leidos y guardados, se empieza con la compra
 		Compra c;
@@ -63,13 +61,13 @@ public class tienda{
 					if(articulo.equals(a[0])){
 						c.getArt().setNombre(articulo);//si el articulo está en la lista de productos disponibles, setteo del articulo
 
-						int preciop=Integer.parseInt(a[1]);
+						Double preciop=Double.parseDouble(a[1]);
 						System.out.println("Cantidad: ");//cantidad de articulos
 						String canti = console.readLine();
 						if(canti.equals("")){
 							break;
 						}
-						int cant = Integer.parseInt(canti);
+						Double cant = Double.parseDouble(canti);
 						c.getArt().setPrecio(preciop * cant);//setteo de precio por cantidad (precio final por producto)
 						c.setCant(cant);//setteo de cantidad
 						c.getPer().setName(p.getName());//setteo de la persona dentro de la clase Compra
@@ -106,18 +104,14 @@ public class tienda{
 			String respuesta = console.readLine();
 			if (respuesta.equals("s")){
 				daocompra.consultart();//te muestra todos los datos guardados
-				System.out.println("Para consultar por persona: N | Para consultar por producto: P | Para mostrar por ID: I");
+				System.out.println("Para consultar por persona: N | Para mostrar por ID: I");
 				String respuesta2 = console.readLine();
 				if(respuesta2.equals("n")){
 					System.out.println("Introduce nombre");
 					String r = console.readLine();
 					daocompra.consultarn(r);//te muestra los datos que contienen el nombre introducido
 				}
-				else if(respuesta2.equals("p")){
-					System.out.println("Introduce producto");
-					String r = console.readLine();//te muestra los datos que contienen el producto introducido
-					daocompra.consultarp(r);
-				}
+				
 				else if(respuesta2.equals("i")){
 					System.out.println("Introduce id");
 					String r = console.readLine();

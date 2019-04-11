@@ -1,9 +1,11 @@
+import java.lang.Double;
+
 class Articulo {
     private String nombre;
-    private int precio;
+    private Double precio;
     public Articulo(){
     	nombre = "";
-        precio = 0;
+        precio = 0.0;
     }
     public void setNombre(String nombre){
       this.nombre = nombre;
@@ -11,10 +13,10 @@ class Articulo {
     public String getNombre(){
       return nombre;
     }
-    public void setPrecio(int precio){
+    public void setPrecio(Double precio){
         this.precio=precio;
     }
-    public int getPrecio(){
+    public Double getPrecio(){
         return precio;
     }
 }
