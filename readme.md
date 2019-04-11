@@ -79,7 +79,7 @@ Los cambios para la v0.2:
 -Pequeñas mejoras de código.
 
 ## Autores:
-Robert Marius Puiu (Enlazamiento entre código, mejora y agregado de código adicional.)  
+Robert Marius Puiu (Enlazamiento entre código, mejoras y agregado de código adicional.)  
 Guillermo Pérez Aragón (Aportación de clases, DAOs, fechas y mejoras de código.)
 
 &copy;
