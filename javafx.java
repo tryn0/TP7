@@ -28,9 +28,7 @@ import javafx.event.EventHandler;
 
 import javafx.geometry.Pos;
 
-
 import java.io.FileInputStream;
-
 
 import java.util.ArrayList;
 import java.io.Console;
@@ -46,8 +44,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 
-
-public class graf2 extends Application {
+public class javafx extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		Compra c = new Compra();
