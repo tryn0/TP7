@@ -23,8 +23,8 @@ public class JDBCCompra implements DAOCompra{
 		try (Connection conn = this.conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, c.getPer().getName());
 			pstmt.setString(2, c.getArt().getNombre());
-			pstmt.setInt(3, c.getCant());
-			pstmt.setInt(4, c.getArt().getPrecio());
+			pstmt.setDouble(3, c.getCant());
+			pstmt.setDouble(4, c.getArt().getPrecio());
 			pstmt.setInt(5, c.getId());
 			pstmt.setTimestamp(6, sqlDate);
 			pstmt.executeUpdate();
@@ -56,33 +56,21 @@ public class JDBCCompra implements DAOCompra{
 			Connection conn = this.conectar();
 			PreparedStatement pstmt = conn.prepareStatement(sql2);
 			ResultSet rs = pstmt.executeQuery();
-			System.out.println("CLIENTE|PRODUCTO|CANTIDAD|PRECIO|ID|FECHA");
-			while (rs.next()) {	
-				 System.out.println(rs.getString("Cliente")+ " | " +rs.getString("Producto")+" | "+rs.getInt("Cantidad")+" | "+rs.getInt("Precio") + " | " + rs.getInt("ID") + " | " + rs.getTimestamp("Fecha"));
+			if(!rs.toString().isEmpty()){
+				System.out.println("CLIENTE|PRODUCTO|CANTIDAD|PRECIO|ID|FECHA"+"\n");
+				while (rs.next()) {	
+					System.out.println(rs.getString("Cliente")+ " | " +rs.getString("Producto")+" | "+rs.getDouble("Cantidad")+" | "+rs.getDouble("Precio") + " | " + rs.getInt("ID") + " | " + rs.getTimestamp("Fecha"));
 
-			 }	
+				}
+			}else{
+				System.out.println("\n"+nombre+" no se encuentra en nuestra base de datos, pruebe con otro nombre."+"\n");
+			}
 		}
 		catch (SQLException o) {
 			System.out.println(o.getMessage());
 		}
 	}
 
-	public void consultarp(String producto){//aqui te muestra solo aquellos con el producto introducido
-		try{
-			String sql2 = "SELECT * FROM compra WHERE PRODUCTO ='"+producto+"'";
-			Connection conn = this.conectar();
-			PreparedStatement pstmt = conn.prepareStatement(sql2);
-			ResultSet rs = pstmt.executeQuery();
-			System.out.println("CLIENTE|PRODUCTO|CANTIDAD|PRECIO|ID|FECHA");
-			while (rs.next()) {	
-				 System.out.println(rs.getString("Cliente")+ " | " +rs.getString("Producto")+" | "+rs.getInt("Cantidad")+" | "+rs.getInt("Precio") + " | " + rs.getInt("ID") + " | " + rs.getTimestamp("Fecha"));
-
-			 }	
-		}
-		catch (SQLException o) {
-			System.out.println(o.getMessage());
-		}
-	}
 
 	public void consultari(int id){//aqui te muestra solo aquellos con la ID introducida.
 		try{
@@ -90,14 +78,19 @@ public class JDBCCompra implements DAOCompra{
 			Connection conn = this.conectar();
 			PreparedStatement pstmt = conn.prepareStatement(sql2);
 			ResultSet rs = pstmt.executeQuery();
-			System.out.println("CLIENTE|PRODUCTO|CANTIDAD|PRECIO|ID|FECHA");
-			while (rs.next()) {	
-				 System.out.println(rs.getString("Cliente")+ " | " +rs.getString("Producto")+" | "+rs.getInt("Cantidad")+" | "+rs.getInt("Precio") + " | " + rs.getInt("ID") + " | " + rs.getTimestamp("Fecha"));
+			if(!rs.toString().isEmpty()){
+				System.out.println("CLIENTE|PRODUCTO|CANTIDAD|PRECIO|ID|FECHA"+"\n");
+				while (rs.next()) {	
+					System.out.println(rs.getString("Cliente")+ " | " +rs.getString("Producto")+" | "+rs.getDouble("Cantidad")+" | "+rs.getDouble("Precio") + " | " + rs.getInt("ID") + " | " + rs.getTimestamp("Fecha"));
 
-			 }	
+				}
+			}else{
+				System.out.println("\n"+"El ID "+id+" no se encuentra en nuestra base de datos, pruebe con otro."+"\n");
+			}
 		}
 		catch (SQLException o) {
 			System.out.println(o.getMessage());
 		}
 	}
+
 }

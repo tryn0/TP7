@@ -4,18 +4,17 @@ import java.util.Date;
 public class Compra {
   private Person per;
   private Articulo art;
-  private int cant;
+  private Double cant;
   private int id;
   private ArrayList<Compra> articulos;
   private Date fecha;
-  private String idFactura;
+
   public Compra() {
     per = new Person();
     art = new Articulo();
-    cant = 0;
+    cant = 0.0;
     id=0;
     fecha = new Date();
-    idFactura = null;
   }
   public void setPer(Person unPerson) {
     per = unPerson;
@@ -23,7 +22,7 @@ public class Compra {
   public void setArt(Articulo art) {
     this.art = art;
   }
-  public void setCant(int cant) {
+  public void setCant(Double cant) {
     this.cant = cant;
   }
   public void setId(int id){
@@ -35,7 +34,7 @@ public class Compra {
   public Articulo getArt() {
     return art;
   }
-  public int getCant() {
+  public Double getCant() {
     return cant;
   }
   public int getId(){

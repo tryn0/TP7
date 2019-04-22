@@ -3,6 +3,5 @@ public interface DAOCompra {
 	void consultart();
 	void consultarn(String nombre);
 	void consultari(int id);
-	void consultarp(String producto);
 }
 //interface para las consultas
