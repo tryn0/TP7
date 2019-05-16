@@ -1,4 +1,4 @@
-# Trabajo Práctico 7 [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
+# Trabajo Práctico 9 [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
 
 Este trabajo práctico ha sido realizado para el módulo de programación.
 
@@ -36,12 +36,12 @@ java -cp .;json-20180813.jar;sqlite-jdbc-3.25.2.jar;. JDBC
 ```
 Una vez hecho esto se creará el fichero compra.db, listo su uso.
 ## ¿Qué se ha usado?
-Para este trabajo usamos JSON para leer el catálogo de productos y JDBC (Java Data Base Connectivity) para almacenar los pedidos en una base de datos.  
+Para este trabajo usamos una GUI, para introducir un catálogo de 6 productos y darle uso y JDBC (Java Data Base Connectivity) para almacenar los pedidos en una base de datos.  
 Para poder ejecutar correctamente esta trabajo es necesario tener dos archivo .jar que hará posible el uso de [JSON](http://central.maven.org/maven2/org/json/json/20180813/json-20180813.jar) y de [JDBC](https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc/3.25.2).
 
 ## Contenido del proyecto:
 
-Tienda.java     --> Es la clase principal, cuyo funcionamiento se explica más adelante.
+JavaFX.java     --> Es la clase principal, cuyo funcionamiento se explica más adelante.
 
 Compra.java     --> Crea un objeto compra, que contiene la clase Articulo, y la clase Persona implementadas.
 
@@ -55,19 +55,17 @@ JDBCCompra.java --> Contiene métodos para conectarse a la bd, para grabar, y pa
 
 JDBC.java       --> Sirve para crear la tabla "compra".
 
-productos.json  --> Aquí se guarda el catálogo de compras, en formato json.
-
 compra.db       --> Es el fichero de base de datos, que contiene la tabla "compra".
 
 ## Fin:
 Este programa tiene el fin de guardar una lista de compras o factura de compras.  
-Al ejecutar mostrará una serie de productos disponibles, de los cuales el cliente deberá elegir el deseado y la cantidad que desee. 
+Al ejecutar mostrará una serie de productos disponibles, de los cuales el cliente deberá elegir los deseados y la cantidad que desee. 
 
 Una vez elegidos todos los productos, se mostrará el precio total por producto.  
 Seguidamente nos dará la opción de visualizar la factura a través de una base de datos, donde se almacenan los datos de las facturas (persona, producto, cantidad, precio e ID).
 
 ## ¿Cómo funciona?
-En un principio, el programa Tienda.java coge informacion del fichero json, para asi poseer un catalogo de productos permitidos, que contienen nombre y precio. Una vez obtenido el catalogo, el programa hace una nueva compra(ahi es donde entran las clases Articulo,Compra, y Person), y empieza a pedir datos por teclado, para definir dicha compra(nombre de la persona, que articulo se quiere comprar, etc..).  
+En un principio, el programa JavaFX.java contiene su propia informacion  del catalogo de productos permitidos, que contienen nombre y precio.  El programa hace una nueva compra(ahi es donde entran las clases Articulo,Compra, y Person), y empieza a pedir datos por pantalla, para definir dicha compra(nombre de la persona, que articulo se quiere comprar, etc..).  
 
 El programa es capaz de que una persona, pueda tener uno o mas articulos, y tambien puede tener una o mas compras(que estan distribuidos por ID) por lo que, se pueden repetir nombres en las personas.Cada vez que se hace una entrada, al finalizar, el programa guarda la informacion en la base de datos del fichero compra.db(aqui es donde se empieza a usar El fichero DAOCompra, y su implementación). 
 
@@ -77,9 +75,12 @@ Una vez que ya se acaban con las entradas, existe la posibilidad de consultar lo
 Los cambios para la v0.2:  
 -Se le ha añadido fecha y hora a la factura de la compra, tanto a la clase Compra como a la compra guardada en la base de datos compra.db.  
 -Pequeñas mejoras de código.
+-Cambio a GUI
+-Uso avanzado de transiciones y manejo de datos
+-Mejor organización y codigo mas limpio
 
 ## Autores:
-Robert Marius Puiu (Enlazamiento entre código, mejora y agregado de código adicional.)  
-Guillermo Pérez Aragón (Aportación de clases, DAOs, fechas y mejoras de código.)
+Robert Marius Puiu (Enlazamiento entre código, mejora y agregado de código adicional,codigo de la GUI,enlazamiento con la BD)  
+Guillermo Pérez Aragón (Aportación de clases, DAOs, fechas y mejoras de código, arreglo del codigo anterior, aportacion en la GUI)
 
 &copy;
