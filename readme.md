@@ -74,10 +74,10 @@ Una vez que ya se acaban con las entradas, existe la posibilidad de consultar lo
 ## Cambios:
 Los cambios para la v0.2:  
 -Se le ha añadido fecha y hora a la factura de la compra, tanto a la clase Compra como a la compra guardada en la base de datos compra.db.  
--Pequeñas mejoras de código.
--Cambio a GUI.
--Uso avanzado de transiciones y manejo de datos.
--Mejor organización y codigo mas limpio.
+-Pequeñas mejoras de código. 
+-Cambio a GUI. 
+-Uso avanzado de transiciones y manejo de datos. 
+-Mejor organización y codigo mas limpio. 
 ## Autores:
 Robert Marius Puiu (Enlazamiento entre código, mejora y agregado de código adicional,codigo de la GUI,enlazamiento con la BD)  
 Guillermo Pérez Aragón (Aportación de clases, DAOs, fechas y mejoras de código, arreglo del codigo anterior, aportacion en la GUI)
